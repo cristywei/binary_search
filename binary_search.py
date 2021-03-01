@@ -44,7 +44,7 @@ def find_smallest_positive(xs):
         if xs[mid] < 0:
             left = mid + 1
         if xs[mid] == 0:
-            return mid+1
+            return mid + 1
 
     if xs[left] > 0:
         return left
@@ -77,7 +77,7 @@ def count_repeats(xs, x):
     if len(xs) == 0 or xs[0] < x or xs[-1] > x:
         return 0
 
-    def GTE_x(left, right):
+    def gte_x(left, right):
         if xs[left] == x:
             return left
         if (right - left) <= 1:
@@ -91,9 +91,9 @@ def count_repeats(xs, x):
             right = mid
         elif xs[mid] == x and xs[mid - 1] != x:
             return mid
-        return GTE_x(left, right)
+        return gte_x(left, right)
 
-    def LT_x(left, right):
+    def lt_x(left, right):
         if xs[right] == x:
             return right + 1
         mid = (left + right) // 2
@@ -105,9 +105,9 @@ def count_repeats(xs, x):
             left = mid
         elif xs[mid] == x and xs[mid + 1] != x:
             return mid + 1
-        return LT_x(left, right)
+        return lt_x(left, right)
 
-    return LT_x(0, len(xs) - 1) - GTE_x(0, len(xs) - 1)
+    return lt_x(0, len(xs) - 1) - gte_x(0, len(xs) - 1)
 
 
 def argmin(f, lo, hi, epsilon=1e-3):
